@@ -9,18 +9,22 @@ import {Table} from "./components/Table";
 import {Bar} from "./components/bar/BarView";
 import {Button, Content, Header, Wrapper} from "./AppStyled";
 import {Filter} from "./components/filter/Filter";
+import {Pagination} from "./components/pagination/Pagination";
 
 const App = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+    const [contactsForPage, setContactsForPage] = useState(100)
+
     const dispatch = useDispatch()
     const store = useSelector((store: InitialStateType) => {return store})
     const {tableView, isLoading} = store
 
     const [handleSearchFullName, setHandleSearchFullName] = useState('');
     const add = () =>{
-            dispatch(fatchContacts())
+            dispatch(fatchContacts(currentPage, contactsForPage))
     }
     useEffect(() => {
-        dispatch(fatchContacts())
+        dispatch(fatchContacts(currentPage, contactsForPage))
     }, [])
 
 
@@ -35,7 +39,15 @@ const App = () => {
            last.toLowerCase().includes(handleSearchFullName.toLowerCase()))
     }
 
-    let filteredContacts = store.array.filter(contact => filteredByFullName(contact.name))
+ let parse = JSON.parse(JSON.stringify(store.array))
+    let filteredContacts = parse.filter((contact: any) => filteredByFullName(contact.name))
+    let filteredContactsSum = filteredContacts.length
+    let paginationContacts = [...filteredContacts].slice(((currentPage -1 )* 10),(currentPage * 10))
+    console.log(filteredContactsSum)
+
+    const changePage = (page: number) => {
+        setCurrentPage(page)
+    }
 
     return (
         <Wrapper>
@@ -52,10 +64,11 @@ const App = () => {
                 </div>
                     :
                     <div>
-                    {tableView ? <Table filteredContacts={filteredContacts}/> : <Bar/>}
+                    {tableView ? <Table filteredContacts={paginationContacts}/> : <Bar/>}
                     </div>
                 }
             </Content>
+            <Pagination changePage={changePage} filteredContactsSum={filteredContactsSum}/>
         </Wrapper>
     );
 }

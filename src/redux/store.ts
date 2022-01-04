@@ -32,14 +32,14 @@ export type InitialStateType = {
     isLoading: boolean
     tableView: boolean
     array: Array<Contact>
-    hhh: string
+
 }
 
 const initialState: InitialStateType = {
     isLoading: false,
     tableView: true,
     array: [],
-    hhh: 'sdsads'
+
 }
 
 

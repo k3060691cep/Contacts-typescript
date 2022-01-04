@@ -46,6 +46,8 @@ export const Table = (props: any) => {
     const contacts = useSelector((store:InitialStateType) => {return store.array})
     const sortByName = () => { }
 
+    console.log(filteredContacts)
+
     return (
         <TableStyled>
             <Tbody>

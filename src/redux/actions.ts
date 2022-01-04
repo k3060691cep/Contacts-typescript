@@ -8,10 +8,10 @@ import {
     contactViewType, FILTER_CONTACT, GET_CONTACT_URL
 } from "./ActionsTyps";
 
-export const fatchContacts = () => {
+export const fatchContacts = (currentPage: number, contactsForPage: number) => {
     return (dispatch: any) => {
         dispatch(tryGetContactAction(true))
-        fetch(`${GET_CONTACT_URL}?page=1&results=100&seed=abc`)
+        fetch(`${GET_CONTACT_URL}?results=${contactsForPage}&seed=abc`)
             .then(res => res.json())
             .then(json => dispatch(getContactAction(json.results)))
             .catch(error => console.log(error))

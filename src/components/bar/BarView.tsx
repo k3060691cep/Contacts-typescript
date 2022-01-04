@@ -29,6 +29,7 @@ const Span = styled.span`
 `
 export const Bar = () => {
     const contacts = useSelector((store:InitialStateType) => {return store.array})
+
     return (
         <Wrapper>
             {contacts && contacts.map((item: any) => (
