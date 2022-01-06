@@ -13,18 +13,19 @@ import {Pagination} from "./components/pagination/Pagination";
 
 const App = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [contactsForPage, setContactsForPage] = useState(100)
+    const [contacts, setContacts] = useState(200)
+    const [handleSearchFullName, setHandleSearchFullName] = useState('');
 
     const dispatch = useDispatch()
     const store = useSelector((store: InitialStateType) => {return store})
     const {tableView, isLoading} = store
 
-    const [handleSearchFullName, setHandleSearchFullName] = useState('');
+
     const add = () =>{
-            dispatch(fatchContacts(currentPage, contactsForPage))
+            dispatch(fatchContacts(currentPage, contacts))
     }
     useEffect(() => {
-        dispatch(fatchContacts(currentPage, contactsForPage))
+        dispatch(fatchContacts(currentPage, contacts))
     }, [])
 
 
@@ -36,15 +37,20 @@ const App = () => {
        return (
            title.toLowerCase().includes(handleSearchFullName.toLowerCase()) ||
            first.toLowerCase().includes(handleSearchFullName.toLowerCase())||
-           last.toLowerCase().includes(handleSearchFullName.toLowerCase()))
+           last.toLowerCase().includes(handleSearchFullName.toLowerCase())
+       )
+    }
+    if(handleSearchFullName !== ''){
+
     }
 
- let parse = JSON.parse(JSON.stringify(store.array))
-    let filteredContacts = parse.filter((contact: any) => filteredByFullName(contact.name))
+    let filteredContacts = store.array.filter((contact: any) => filteredByFullName(contact.name))
     let filteredContactsSum = filteredContacts.length
-    let paginationContacts = [...filteredContacts].slice(((currentPage -1 )* 10),(currentPage * 10))
-    console.log(filteredContactsSum)
+    let paginationContacts = filteredContacts.slice(((currentPage -1 )* 10),(currentPage * 10))
 
+    useEffect(() => {
+        setCurrentPage(1)
+    },[handleSearchFullName])
     const changePage = (page: number) => {
         setCurrentPage(page)
     }
@@ -68,7 +74,7 @@ const App = () => {
                     </div>
                 }
             </Content>
-            <Pagination changePage={changePage} filteredContactsSum={filteredContactsSum}/>
+            <Pagination changePage={changePage} currentPage={currentPage} filteredContactsSum={filteredContactsSum}/>
         </Wrapper>
     );
 }

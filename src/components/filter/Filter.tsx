@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {InitialStateType} from "../../redux/store";
-import {filterContactAction} from "../../redux/actions";
+
+
 
 export const Filter = (props: any) => {
     const {handleSearchFullName, setHandleSearchFullName } =props
@@ -10,10 +8,10 @@ export const Filter = (props: any) => {
         setHandleSearchFullName(event)
     }
 
-
     return (
         <div>
-            <input type="text" value={handleSearchFullName} onChange={event => handleSearch(event.target.value) }/>
+            <input type="text" placeholder='Search by full name' value={handleSearchFullName} onChange={event => handleSearch(event.target.value) }/>
+            <input type="text"/>
         </div>
     );
 };

@@ -1,33 +1,29 @@
-import * as React from 'react';
-import styled from "styled-components";
-import { useNavigate  } from "react-router-dom";
-
-const Ul = styled.li`
-  display: flex;
-  list-style-type: none;
-`
-const Li = styled.li`
-  margin: 4px 4px;
-  padding: 4px 4px;
-  cursor: pointer;
-  background-color: #61dafb;
-`
+import React, {CSSProperties, useEffect, useState} from 'react';
+import {Li, Ul} from "./Styled";
 
 export function Pagination(props: any) {
-  const {changePage, filteredContactsSum} = props
-    let arr = []
+    const [array, setArray] = useState([]);
+    const {changePage, filteredContactsSum, currentPage} = props
+    let arr: any = []
     const itemsForPage = Math.ceil(filteredContactsSum/10)
+
     for(let i = 1; i <= itemsForPage; i++){
         arr.push(i)
     }
     const pageHandleChange = (pageNumber: number) => {
         changePage(pageNumber)
     }
+    useEffect(() => {
+        arr && setArray(arr)
+    },[])
 
     return (
         <div>
             <Ul>
-                {arr.map(item => <Li onClick={()=> pageHandleChange(item)}>{item}</Li>)}
+                {array&& array.map((item, index) =>
+                    <Li key={index} active={item === currentPage ? 'active' : ''}
+                        onClick={() => pageHandleChange(item)}>{item}</Li>
+                )}
             </Ul>
         </div>
     );
