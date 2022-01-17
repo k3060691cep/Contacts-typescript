@@ -14,6 +14,7 @@ const TableStyled = styled.table`
   border-radius: 8px;
 `
 const Header = styled.tr`
+
   margin: 160px 160px;
   border: none;
   cursor: pointer;
@@ -23,16 +24,18 @@ const Wrapper = styled.div`
     
 `
 const Row = styled.tr`
-  padding: 128px 128px;
+height: 66px;
+  padding: 0px 108px;
 `
 const Avatar = styled.img`
   border-radius: 50%;
 `
 const Td = styled.td`
- padding: 8px 16px;
+ padding: 8px 24px;
  border-bottom: 1px solid #dddddd;
 `
 const Th =styled.th`
+  
   padding: 16px 16px;
 `
 const Tbody = styled.thead`

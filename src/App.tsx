@@ -40,9 +40,6 @@ const App = () => {
            last.toLowerCase().includes(handleSearchFullName.toLowerCase())
        )
     }
-    if(handleSearchFullName !== ''){
-
-    }
 
     let filteredContacts = store.array.filter((contact: any) => filteredByFullName(contact.name))
     let filteredContactsSum = filteredContacts.length
@@ -51,6 +48,7 @@ const App = () => {
     useEffect(() => {
         setCurrentPage(1)
     },[handleSearchFullName])
+
     const changePage = (page: number) => {
         setCurrentPage(page)
     }

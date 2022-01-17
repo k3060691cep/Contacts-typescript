@@ -4,14 +4,14 @@ type props = {
     active? :string,
 }
 
-export const Ul = styled.li`
+export const Ul = styled.ul`
   display: flex;
   list-style-type: none;
 `
 export const Li = styled.li` 
   margin: 4px 4px;
   padding: 4px 4px;
-  cursor: pointer;
+  cursor: ${(props: props) => props.active ? 'default' : 'pointer'} ;
   border: 1px solid ;
   border-color:  ${(props: props) => props.active ? '#0077b6' : 'gray'};
   color: ${(props: props) => props.active ? '#0077b6' : '#212529'};
