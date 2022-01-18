@@ -1,6 +1,6 @@
 import React, {CSSProperties, useEffect, useState} from 'react';
-import {Li, Ul} from "./Styled";
-import {log} from "util";
+import {Li, Ul, Button} from "./Styled";
+
 
 export function Pagination(props: any) {
     let pages
@@ -34,7 +34,7 @@ export function Pagination(props: any) {
         }
         if (currentPage > 3) {
             firstPage = <>
-                <Li onClick={() => pageHandleChange(paginationArray.length)}>{paginationArray[0]}</Li>
+                <Li onClick={() => pageHandleChange(paginationArray[0])}>{paginationArray[0]}</Li>
                 <div>....</div>
             </>
 
@@ -54,15 +54,15 @@ export function Pagination(props: any) {
     return (
         <div>
             <Ul>
-                <button disabled={currentPage === 1} onClick={() => {
+                <Button disabled={currentPage === 1} onClick={() => {
                     pageHandleChange(currentPage - 1)
-                }}>&#171;</button>
+                }}>&#171;</Button>
                 {firstPage && firstPage}
                 {pages}
                 {lastPage && lastPage}
-                <button disabled={currentPage === paginationArray.length} onClick={() => {
+                <Button disabled={currentPage === paginationArray.length} onClick={() => {
                     pageHandleChange(currentPage + 1)
-                }}>&#187;</button>
+                }}>&#187;</Button>
             </Ul>
         </div>
     );
