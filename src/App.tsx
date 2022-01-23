@@ -10,6 +10,7 @@ import {Bar} from "./components/bar/BarView";
 import {Button, Content, Header, Wrapper} from "./AppStyled";
 import {Filter} from "./components/filter/Filter";
 import {Pagination} from "./components/pagination/Pagination";
+import {AiOutlineBars, AiOutlineAppstore} from "react-icons/all";
 
 const App = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -58,8 +59,8 @@ const App = () => {
             <Header>
                 <Filter store={store} handleSearchFullName={handleSearchFullName} setHandleSearchFullName={setHandleSearchFullName}/>
                 <Button onClick={() => add()}>getPerson</Button>
-                <Button onClick={() => changeView(true)}>Table</Button>
-                <Button onClick={() => changeView(false)}>Bar</Button>
+                <Button onClick={() => changeView(true)}><AiOutlineBars/></Button>
+                <Button onClick={() => changeView(false)}><AiOutlineAppstore/></Button>
             </Header>
             <Content>
                 {isLoading ?

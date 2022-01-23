@@ -1,6 +1,7 @@
 import React, {CSSProperties, useEffect, useState} from 'react';
 import {Li, Ul, Button} from "./Styled";
-
+import { FcNext, FcPrevious,  } from 'react-icons/fc'
+import {BsThreeDots } from 'react-icons/bs'
 
 export function Pagination(props: any) {
     let pages
@@ -29,13 +30,13 @@ export function Pagination(props: any) {
 
         if (currentPage < 17) {
             lastPage = <>
-                <div>....</div>
+                <Li><BsThreeDots/></Li>
                 <Li onClick={() => pageHandleChange(paginationArray.length)}>{paginationArray.length}</Li></>
         }
         if (currentPage > 3) {
             firstPage = <>
                 <Li onClick={() => pageHandleChange(paginationArray[0])}>{paginationArray[0]}</Li>
-                <div>....</div>
+                <Li><BsThreeDots/></Li>
             </>
 
         }
@@ -56,13 +57,13 @@ export function Pagination(props: any) {
             <Ul>
                 <Button disabled={currentPage === 1} onClick={() => {
                     pageHandleChange(currentPage - 1)
-                }}>&#171;</Button>
+                }}><FcPrevious/></Button>
                 {firstPage && firstPage}
                 {pages}
                 {lastPage && lastPage}
                 <Button disabled={currentPage === paginationArray.length} onClick={() => {
                     pageHandleChange(currentPage + 1)
-                }}>&#187;</Button>
+                }}><FcNext/></Button>
             </Ul>
         </div>
     );

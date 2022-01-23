@@ -19,12 +19,15 @@ export const Button = styled.button`
   cursor: ${(props: props) =>  props.disabled ? 'auto' : 'pointer'};
 `
 export const Li = styled.li` 
+   
   font-weight: 500;
   text-align: center;
-  line-height: 30px;
+  line-height: 32px;
   min-width: 32px;
   height: 32px;
   margin: 1px 1px;
+
+  vertical-align: middle;
   cursor: ${(props: props) => props.active ? 'default' : 'pointer'} ;
   border: 1px solid ;
   border-color:  ${(props: props) => props.active ? '#0077b6' : 'gray'};
