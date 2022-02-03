@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-box-sizing: border-box;
-  margin: 16px 180px;
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+  box-sizing: border-box;
+  
+  width: 1600px;
+  
 `
 export const Content = styled.div`
  display: flex;

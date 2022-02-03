@@ -21,7 +21,7 @@ export const fatchContacts = (currentPage: number, contactsForPage: number) => {
 
 export const tryGetContactAction = (payload: boolean):contactLoadingType  => ({type: CONTACT_LOADING, payload})
 export const getContactAction = (payload: Array<object>):contactSuccessType  => ({type: CONTACT_LOADING_SUCCESS,  payload})
-export const filterContactAction = (payload: Array<object>):contactFilterType  => ({type: FILTER_CONTACT,  payload})
+export const filterContactAction = (payload: Array<object>):contactFilterType  => ({type: FILTER_CONTACT, payload})
 export const changeContactViewAction = (payload: any): contactViewType =>  ({type: CHANGE_CONTACT_VIEW, payload})
 
 

@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {InitialStateType} from "./redux/store";
 import {
-    changeContactViewAction, fatchContacts, getContactAction,
+    changeContactViewAction, fatchContacts, filterContactAction, getContactAction,
 } from './redux/actions'
 import {Table} from "./components/Table";
 import {Bar} from "./components/bar/BarView";
@@ -11,6 +10,7 @@ import {Button, Content, Header, Wrapper} from "./AppStyled";
 import {Filter} from "./components/filter/Filter";
 import {Pagination} from "./components/pagination/Pagination";
 import {AiOutlineBars, AiOutlineAppstore} from "react-icons/all";
+import {Statistic} from "./components/statistic/Statistic";
 
 const App = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -19,7 +19,7 @@ const App = () => {
 
     const dispatch = useDispatch()
     const store = useSelector((store: InitialStateType) => {return store})
-    const {tableView, isLoading} = store
+    const {tableView, isLoading, array, renderContacts} = store
 
 
     const add = () =>{
@@ -42,13 +42,15 @@ const App = () => {
        )
     }
 
-    let filteredContacts = store.array.filter((contact: any) => filteredByFullName(contact.name))
-    let filteredContactsSum = filteredContacts.length
-    let paginationContacts = filteredContacts.slice(((currentPage -1 )* 10),(currentPage * 10))
+    let filteredContacts = array.filter((contact: any) => filteredByFullName(contact.name))
+    let filteredContactsSum = renderContacts.length
+    let paginationContacts = renderContacts.slice(((currentPage -1 )* 10),(currentPage * 10))
 
     useEffect(() => {
         setCurrentPage(1)
+        dispatch(filterContactAction(filteredContacts))
     },[handleSearchFullName])
+
 
     const changePage = (page: number) => {
         setCurrentPage(page)
@@ -73,6 +75,7 @@ const App = () => {
                     </div>
                 }
             </Content>
+            <Statistic renderContacts={renderContacts}/>
             <Pagination changePage={changePage} currentPage={currentPage} filteredContactsSum={filteredContactsSum}/>
         </Wrapper>
     );

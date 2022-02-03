@@ -32,27 +32,27 @@ export type InitialStateType = {
     isLoading: boolean
     tableView: boolean
     array: Array<Contact>
-
+    renderContacts: Array<Contact>
 }
 
 const initialState: InitialStateType = {
     isLoading: false,
     tableView: true,
     array: [],
-
+    renderContacts: [],
 }
-
+console.log('inStore',initialState.array)
 
 const contactsReduce = (state: InitialStateType | any = initialState, action: ActionTypes ) => {
     switch (action.type) {
         case CONTACT_LOADING:
             return {...state, isLoading: action.payload}
         case CONTACT_LOADING_SUCCESS:
-            return {...state, array: action.payload, isLoading: false }
+            return {...state, array: action.payload, isLoading: false, renderContacts: action.payload }
         case CHANGE_CONTACT_VIEW:
             return {...state, tableView: action.payload }
         case FILTER_CONTACT:
-            return {...state, array: action.payload ? action.payload: state }
+            return {...state, renderContacts: action.payload ? action.payload: state }
         default:
             return state
     }
