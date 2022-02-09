@@ -6,6 +6,7 @@ import {InitialStateType} from "../../redux/store";
 const Wrapper = styled.div`
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 `
 const Avatar = styled.img`
 margin: 16px auto;
@@ -14,6 +15,7 @@ border-radius: 50%;
   
 `
 const Block = styled.div`
+flex-grow: 1;
 width: 292px;
 margin: 10px 10px;
 -webkit-box-shadow: 0 0 12px 1px rgba(34, 60, 80, 0.2);

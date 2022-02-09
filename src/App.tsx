@@ -4,19 +4,23 @@ import {InitialStateType} from "./redux/store";
 import {
     changeContactViewAction, fatchContacts, filterContactAction, getContactAction,
 } from './redux/actions'
-import {Table} from "./components/Table";
+import {Table} from "./components/table/Table";
 import {Bar} from "./components/bar/BarView";
 import {Button, Content, Header, Wrapper} from "./AppStyled";
 import {Filter} from "./components/filter/Filter";
 import {Pagination} from "./components/pagination/Pagination";
 import {AiOutlineBars, AiOutlineAppstore} from "react-icons/all";
 import {Statistic} from "./components/statistic/Statistic";
+import { useMediaQuery } from 'react-responsive'
 
-const App = () => {
-    const [currentPage, setCurrentPage] = useState(1)
-    const [contacts, setContacts] = useState(200)
+const App: React.FC  = () => {
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [contacts, setContacts] = useState<number>(200)
     const [handleSearchFullName, setHandleSearchFullName] = useState('');
-
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-width: 1640px)'
+    })
+    console.log(isDesktopOrLaptop)
     const dispatch = useDispatch()
     const store = useSelector((store: InitialStateType) => {return store})
     const {tableView, isLoading, array, renderContacts} = store
@@ -29,11 +33,14 @@ const App = () => {
         dispatch(fatchContacts(currentPage, contacts))
     }, [])
 
+    useEffect(() => {
+        dispatch(changeContactViewAction(isDesktopOrLaptop))
+    }, [isDesktopOrLaptop])
 
     const changeView = (handleChangeView: boolean) => {
         dispatch(changeContactViewAction(handleChangeView))
     }
-    const filteredByFullName = (name:any) => {
+    const filteredByFullName = (name: any) => {
        const  {title, first, last} = name
        return (
            title.toLowerCase().includes(handleSearchFullName.toLowerCase()) ||
@@ -59,7 +66,7 @@ const App = () => {
     return (
         <Wrapper>
             <Header>
-                <Filter store={store} handleSearchFullName={handleSearchFullName} setHandleSearchFullName={setHandleSearchFullName}/>
+                <Filter  handleSearchFullName={handleSearchFullName} setHandleSearchFullName={setHandleSearchFullName}/>
                 <Button onClick={() => add()}>getPerson</Button>
                 <Button onClick={() => changeView(true)}><AiOutlineBars/></Button>
                 <Button onClick={() => changeView(false)}><AiOutlineAppstore/></Button>
