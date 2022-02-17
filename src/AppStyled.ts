@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
   max-width: 1600px;
-  
 `
 
 export const Content = styled.div`

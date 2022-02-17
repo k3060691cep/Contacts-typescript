@@ -10,7 +10,7 @@ export const Ul = styled.ul`
   list-style-type: none;
 `
 export const Button = styled.button`
-   font-weight: 500;
+  font-weight: 500;
   text-align: center;
   line-height: 30px;
   min-width: 32px;
@@ -19,13 +19,13 @@ export const Button = styled.button`
   cursor: ${(props: props) =>  props.disabled ? 'auto' : 'pointer'};
 `
 export const Li = styled.li` 
-   
   font-weight: 500;
   text-align: center;
   line-height: 32px;
   min-width: 32px;
   height: 32px;
   margin: 1px 1px;
+  
 
   vertical-align: middle;
   cursor: ${(props: props) => props.active ? 'default' : 'pointer'} ;

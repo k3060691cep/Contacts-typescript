@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore} from 'redux'
 import thunk from 'redux-thunk'
-import {ActionTypes, CHANGE_CONTACT_VIEW, CONTACT_LOADING, CONTACT_LOADING_SUCCESS, FILTER_CONTACT} from './ActionsTyps'
+import {ActionTypes, CHANGE_CONTACT_VIEW, CONTACT_LOADING, CONTACT_LOADING_SUCCESS, FILTER_CONTACT, STATISTIC} from './ActionsTyps'
 import {composeWithDevTools} from "redux-devtools-extension";
 
 export type Picture = {
@@ -33,6 +33,13 @@ export type InitialStateType = {
     tableView: boolean
     array: Array<Contact>
     renderContacts: Array<Contact>
+    statistic: Statistic
+}
+export type Statistic = {
+    collection: number
+    males: number
+    females: number
+    indeterminate: number
 }
 
 const initialState: InitialStateType = {
@@ -40,6 +47,12 @@ const initialState: InitialStateType = {
     tableView: true,
     array: [],
     renderContacts: [],
+    statistic: {
+        collection : 0,
+        males : 0,
+        females : 0,
+        indeterminate : 0,
+    }
 }
 console.log('inStore',initialState.array)
 
@@ -52,6 +65,8 @@ const contactsReduce = (state: InitialStateType | any = initialState, action: Ac
         case CHANGE_CONTACT_VIEW:
             return {...state, tableView: action.payload }
         case FILTER_CONTACT:
+            return {...state, renderContacts: action.payload ? action.payload: state }
+        case STATISTIC:
             return {...state, renderContacts: action.payload ? action.payload: state }
         default:
             return state

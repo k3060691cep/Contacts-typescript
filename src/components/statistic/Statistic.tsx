@@ -1,21 +1,5 @@
 import * as React from 'react';
-import styled from "styled-components";
-
-const ContainerStyled = styled.div`
-  display: block;
-  box-sizing: border-box;
-  margin-top: 8px ;
-  padding: 18px 18px;
-  width: 100%;
-  background-color: yellow;
-`
-const Box = styled.div`
-  display: flex;
-`
-const Item = styled.div`
-  display: block;
-  margin-right: 28px;
-`
+import { Box, ContainerStyled, Item } from './Styled';
 
 type Statistic = {
     collection: number
@@ -24,16 +8,15 @@ type Statistic = {
     indeterminate: number
 }
 
-export const Statistic = (props: any) => {
+export const Statistic = ({renderContacts}: any) => {
     let statisticArr: Statistic = {
         collection : 0,
         males : 0,
         females : 0,
         indeterminate : 0,
     }
-    let count = 0
 
-    let statistic = props.renderContacts.map((el:any, index: number) => {
+    let statistic = renderContacts.map((el:any, index: number) => {
         if(el){
             statisticArr.collection += 1
         }

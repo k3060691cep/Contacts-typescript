@@ -1,3 +1,5 @@
+import { addBusinessDays } from "date-fns";
+import { MdDesktopAccessDisabled } from "react-icons/md";
 import {
     CHANGE_CONTACT_VIEW,
     CONTACT_LOADING,
@@ -5,7 +7,9 @@ import {
     CONTACT_LOADING_SUCCESS, contactFilterType,
     contactLoadingType,
     contactSuccessType,
-    contactViewType, FILTER_CONTACT, GET_CONTACT_URL
+    contactViewType, FILTER_CONTACT, GET_CONTACT_URL,
+    statisticType, STATISTIC
+    
 } from "./ActionsTyps";
 
 export const fatchContacts = (currentPage: number, contactsForPage: number) => {
@@ -23,6 +27,6 @@ export const tryGetContactAction = (payload: boolean):contactLoadingType  => ({t
 export const getContactAction = (payload: Array<object>):contactSuccessType  => ({type: CONTACT_LOADING_SUCCESS,  payload})
 export const filterContactAction = (payload: Array<object>):contactFilterType  => ({type: FILTER_CONTACT, payload})
 export const changeContactViewAction = (payload: any): contactViewType =>  ({type: CHANGE_CONTACT_VIEW, payload})
-
+export const chageStatisticAction = (payload: any): statisticType =>  ({type: STATISTIC, payload})
 
 
